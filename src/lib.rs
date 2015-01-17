@@ -1,7 +1,8 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-
+//! A simple interface to the Google URL Shortener API.
 #![allow(unstable)]
+#![unstable]
 
 extern crate hyper;
 extern crate "rustc-serialize" as rustc_serialize;
@@ -23,6 +24,7 @@ use url::form_urlencoded::{serialize};
 
 const BASEURL: &'static str = "https://www.googleapis.com/urlshortener/v1/url";
 
+/// Contains all possible errors you might get while shortening a URL
 #[derive(Show)]
 pub enum Error {
     BadStatus(StatusCode, String),
@@ -53,6 +55,7 @@ impl FromError<UrlError> for Error {
     }
 }
 
+/// Shortens a URL using the Google URL Shortener API
 pub fn shorten(key: &str, longurl: &str) -> Result<String, Error> {
     let query = [("key", key)];
     let query = serialize(query.iter().map(|&x| x));
