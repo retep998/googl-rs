@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Error` enum in crate `googl`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Error">
+
+    <title>googl::Error - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>googl</a></p><div class='block enum'><h2>Enums</h2><a class='enum current' href='enum.Error.html'>Error</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.shorten.html'>shorten</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>googl</a>::<wbr><a class='enum' href=''>Error</a><wbr><a class='stability Unstable' title=''>Unstable</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-41' href='../src/googl/lib.rs.html#29-36'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum Error {
+    BadStatus(<a class='enum' href='../hyper/status/enum.StatusCode.html' title='hyper::status::StatusCode'>StatusCode</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
+    Http(<a class='enum' href='../hyper/enum.HttpError.html' title='hyper::HttpError'>HttpError</a>),
+    Io(<a class='struct' href='http://doc.rust-lang.org/nightly/std/io/struct.IoError.html' title='std::io::IoError'>IoError</a>),
+    Json(<a class='type' href='../rustc-serialize/json/type.BuilderError.html' title='rustc-serialize::json::BuilderError'>BuilderError</a>),
+    MissingId(<a class='enum' href='../rustc-serialize/json/enum.Json.html' title='rustc-serialize::json::Json'>Json</a>),
+    Url(<a class='enum' href='../url/parser/enum.ParseError.html' title='url::parser::ParseError'>UrlError</a>),
+}</pre><div class='docblock'><p>Contains all possible errors you might get while shortening a URL</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.BadStatus'><a class='stability Unstable' title='Unstable'></a><code>BadStatus</code></td><td></td></tr><tr><td id='variant.Http'><a class='stability Unstable' title='Unstable'></a><code>Http</code></td><td></td></tr><tr><td id='variant.Io'><a class='stability Unstable' title='Unstable'></a><code>Io</code></td><td></td></tr><tr><td id='variant.Json'><a class='stability Unstable' title='Unstable'></a><code>Json</code></td><td></td></tr><tr><td id='variant.MissingId'><a class='stability Unstable' title='Unstable'></a><code>MissingId</code></td><td></td></tr><tr><td id='variant.Url'><a class='stability Unstable' title='Unstable'></a><code>Url</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.FromError.html' title='std::error::FromError'>FromError</a>&lt;<a class='enum' href='../hyper/enum.HttpError.html' title='hyper::HttpError'>HttpError</a>&gt; for <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.from_error' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_error' class='fnname'>from_error</a>(err: <a class='enum' href='../hyper/enum.HttpError.html' title='hyper::HttpError'>HttpError</a>) -&gt; <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.FromError.html' title='std::error::FromError'>FromError</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/io/struct.IoError.html' title='std::io::IoError'>IoError</a>&gt; for <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.from_error' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_error' class='fnname'>from_error</a>(err: <a class='struct' href='http://doc.rust-lang.org/nightly/std/io/struct.IoError.html' title='std::io::IoError'>IoError</a>) -&gt; <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.FromError.html' title='std::error::FromError'>FromError</a>&lt;<a class='type' href='../rustc-serialize/json/type.BuilderError.html' title='rustc-serialize::json::BuilderError'>BuilderError</a>&gt; for <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.from_error' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_error' class='fnname'>from_error</a>(err: <a class='type' href='../rustc-serialize/json/type.BuilderError.html' title='rustc-serialize::json::BuilderError'>BuilderError</a>) -&gt; <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.FromError.html' title='std::error::FromError'>FromError</a>&lt;<a class='enum' href='../url/parser/enum.ParseError.html' title='url::parser::ParseError'>UrlError</a>&gt; for <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.from_error' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_error' class='fnname'>from_error</a>(err: <a class='enum' href='../url/parser/enum.ParseError.html' title='url::parser::ParseError'>UrlError</a>) -&gt; <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a> for <a class='enum' href='../googl/enum.Error.html' title='googl::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "googl";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
