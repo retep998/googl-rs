@@ -7,7 +7,7 @@ description = "A simple interface to the Google URL Shortener API."
 documentation = "http://retep998.github.io/googl-rs/googl/"
 repository = "https://github.com/retep998/googl-rs"
 readme = "README.md"
-keywords = ["Google", "API", "Url Shortener"]
+keywords = ["Google", "API", "URL", "Shortener"]
 license = "MIT"
 
 [dependencies]
