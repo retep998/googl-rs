@@ -1,7 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! A simple interface to the Google URL Shortener API.
-#![allow(unstable)]
+#![feature(core, io)]
 #![unstable]
 
 extern crate hyper;
@@ -17,7 +17,7 @@ use hyper::status::{StatusCode};
 use rustc_serialize::json::{BuilderError, Json};
 use std::borrow::{ToOwned};
 use std::error::{FromError};
-use std::io::{IoError};
+use std::old_io::{IoError};
 use url::{Url};
 use url::ParseError as UrlError;
 use url::form_urlencoded::{serialize};
@@ -25,7 +25,7 @@ use url::form_urlencoded::{serialize};
 const BASEURL: &'static str = "https://www.googleapis.com/urlshortener/v1/url";
 
 /// Contains all possible errors you might get while shortening a URL
-#[derive(Show)]
+#[derive(Debug)]
 pub enum Error {
     BadStatus(StatusCode, String),
     Http(HttpError),

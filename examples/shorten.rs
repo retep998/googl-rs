@@ -1,10 +1,10 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-#![allow(unstable)]
+#![feature(io, os, path)]
 
 extern crate googl;
 
-use std::io::fs::File;
+use std::old_io::fs::File;
 use std::os::args;
 
 fn main() {
