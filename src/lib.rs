@@ -1,7 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! A simple interface to the Google URL Shortener API.
-#![feature(core, io)]
+#![feature(old_io)]
 #![unstable]
 
 extern crate hyper;
@@ -60,7 +60,7 @@ pub fn shorten(key: &str, longurl: &str) -> Result<String, Error> {
     let query = [("key", key)];
     let query = serialize(query.iter().map(|&x| x));
     let url = format!("{}?{}", BASEURL, query);
-    let url = try!(Url::parse(&url[]));
+    let url = try!(Url::parse(&url));
     let mut request = try!(Request::new(Method::Post, url));
     request.headers_mut().set(ContentType(Mime(TopLevel::Application, SubLevel::Json, vec![])));
     let mut request = try!(request.start());
