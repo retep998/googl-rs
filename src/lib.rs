@@ -1,9 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! A simple interface to the Google URL Shortener API.
-#![feature(old_io)]
-#![unstable]
-
 extern crate hyper;
 extern crate "rustc-serialize" as rustc_serialize;
 extern crate url;
@@ -17,7 +14,8 @@ use hyper::status::{StatusCode};
 use rustc_serialize::json::{BuilderError, Json};
 use std::borrow::{ToOwned};
 use std::error::{FromError};
-use std::old_io::{IoError};
+use std::io::{Read, Write};
+use std::io::Error as IoError;
 use url::{Url};
 use url::ParseError as UrlError;
 use url::form_urlencoded::{serialize};
@@ -66,9 +64,10 @@ pub fn shorten(key: &str, longurl: &str) -> Result<String, Error> {
     let mut request = try!(request.start());
     let body = vec![("longUrl".to_owned(), Json::String(longurl.to_owned()))];
     let body = Json::Object(body.into_iter().collect());
-    try!(request.write_str(&*body.to_string()));
+    try!(request.write_all(body.to_string().as_bytes()));
     let mut response = try!(request.send());
-    let body = try!(response.read_to_string());
+    let mut body = String::new();
+    try!(response.read_to_string(&mut body));
     if response.status != StatusCode::Ok {
         return Err(Error::BadStatus(response.status, body))
     }
