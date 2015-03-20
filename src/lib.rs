@@ -2,7 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! A simple interface to the Google URL Shortener API.
 extern crate hyper;
-extern crate "rustc-serialize" as rustc_serialize;
+extern crate rustc_serialize;
 extern crate url;
 
 use hyper::{HttpError};
@@ -13,7 +13,6 @@ use hyper::mime::{Mime, SubLevel, TopLevel};
 use hyper::status::{StatusCode};
 use rustc_serialize::json::{BuilderError, Json};
 use std::borrow::{ToOwned};
-use std::error::{FromError};
 use std::io::{Read, Write};
 use std::io::Error as IoError;
 use url::{Url};
@@ -32,23 +31,23 @@ pub enum Error {
     MissingId(Json),
     Url(UrlError),
 }
-impl FromError<HttpError> for Error {
-    fn from_error(err: HttpError) -> Error {
+impl From<HttpError> for Error {
+    fn from(err: HttpError) -> Error {
         Error::Http(err)
     }
 }
-impl FromError<IoError> for Error {
-    fn from_error(err: IoError) -> Error {
+impl From<IoError> for Error {
+    fn from(err: IoError) -> Error {
         Error::Io(err)
     }
 }
-impl FromError<BuilderError> for Error {
-    fn from_error(err: BuilderError) -> Error {
+impl From<BuilderError> for Error {
+    fn from(err: BuilderError) -> Error {
         Error::Json(err)
     }
 }
-impl FromError<UrlError> for Error {
-    fn from_error(err: UrlError) -> Error {
+impl From<UrlError> for Error {
+    fn from(err: UrlError) -> Error {
         Error::Url(err)
     }
 }
