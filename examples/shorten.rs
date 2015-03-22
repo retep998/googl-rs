@@ -1,16 +1,16 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-#![feature(io, os, path)]
-
 extern crate googl;
 
-use std::old_io::fs::File;
-use std::os::args;
+use std::env::{args};
+use std::fs::{File};
+use std::io::{Read};
+use std::path::{Path};
 
 fn main() {
-    let arg = args();
-    let longurl = &*arg[1];
+    let longurl = args().next().unwrap();
     let mut file = File::open(&Path::new("key.txt")).unwrap();
-    let key = file.read_to_string().unwrap();
-    println!("{:?}", googl::shorten(&*key, &*longurl));
+    let mut key = String::new();
+    file.read_to_string(&mut key).unwrap();
+    println!("{:?}", googl::shorten(&key, &longurl));
 }
