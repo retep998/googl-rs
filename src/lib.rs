@@ -5,7 +5,7 @@ extern crate hyper;
 extern crate rustc_serialize;
 extern crate url;
 
-use hyper::{HttpError};
+use hyper::Error as HttpError;
 use hyper::client::{Request};
 use hyper::header::{ContentType};
 use hyper::method::{Method};
