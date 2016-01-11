@@ -7,7 +7,7 @@ documentation = "http://retep998.github.io/googl-rs/googl/"
 repository = "https://github.com/retep998/googl-rs"
 readme = "README.md"
 keywords = ["Google", "API", "URL", "Shortener"]
-license = "MIT"
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 hyper = "*"
