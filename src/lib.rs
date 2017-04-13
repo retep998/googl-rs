@@ -57,6 +57,7 @@ pub fn shorten(key: &str, longurl: &str) -> Result<String, Error> {
     let url = format!("{}?{}", BASEURL, query);
     let body = vec![("longUrl".to_owned(), Json::String(longurl.to_owned()))];
     let body = Json::Object(body.into_iter().collect()).to_string();
+    println!("{:?}", body);
     let mut response = try!(client.post(&url)
         .header(ContentType(Mime(TopLevel::Application, SubLevel::Json, vec![])))
         .body(&body)
