@@ -1,15 +1,16 @@
 [package]
 name = "googl"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "A simple interface to the Google URL Shortener API."
-documentation = "http://retep998.github.io/googl-rs/googl/"
+documentation = "https://docs.rs/googl/"
 repository = "https://github.com/retep998/googl-rs"
 readme = "README.md"
-keywords = ["Google", "API", "URL", "Shortener"]
-license = "MIT"
+keywords = ["google", "url", "shortener"]
+license = "MIT/Apache-2.0"
 
 [dependencies]
-hyper = "*"
-url = "*"
-rustc-serialize = "*"
+hyper = "0.10"
+hyper-native-tls = "0.2"
+rustc-serialize = "0.3"
+url = "1.4"

@@ -1,23 +1,24 @@
-// Copyright © 2015, Peter Atashian
+// Copyright © 2015-2017 Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! A simple interface to the Google URL Shortener API.
 extern crate hyper;
+extern crate hyper_native_tls;
 extern crate rustc_serialize;
 extern crate url;
 
+use hyper::Client;
+use hyper::net::HttpsConnector;
+use hyper_native_tls::NativeTlsClient;
+
 use hyper::Error as HttpError;
-use hyper::client::{Request};
 use hyper::header::{ContentType};
-use hyper::method::{Method};
 use hyper::mime::{Mime, SubLevel, TopLevel};
 use hyper::status::{StatusCode};
 use rustc_serialize::json::{BuilderError, Json};
 use std::borrow::{ToOwned};
-use std::io::{Read, Write};
+use std::io::Read;
 use std::io::Error as IoError;
-use url::{Url};
-use url::ParseError as UrlError;
-use url::form_urlencoded::{serialize};
+use url::form_urlencoded::{Serializer};
 
 const BASEURL: &'static str = "https://www.googleapis.com/urlshortener/v1/url";
 
@@ -29,7 +30,6 @@ pub enum Error {
     Io(IoError),
     Json(BuilderError),
     MissingId(Json),
-    Url(UrlError),
 }
 impl From<HttpError> for Error {
     fn from(err: HttpError) -> Error {
@@ -46,25 +46,21 @@ impl From<BuilderError> for Error {
         Error::Json(err)
     }
 }
-impl From<UrlError> for Error {
-    fn from(err: UrlError) -> Error {
-        Error::Url(err)
-    }
-}
 
 /// Shortens a URL using the Google URL Shortener API
 pub fn shorten(key: &str, longurl: &str) -> Result<String, Error> {
-    let query = [("key", key)];
-    let query = serialize(query.iter().map(|&x| x));
+    let ssl = NativeTlsClient::new().unwrap();
+    let connector = HttpsConnector::new(ssl);
+    let client = Client::with_connector(connector);
+    let args = &[("key", key)];
+    let query = Serializer::new(String::new()).extend_pairs(args).finish();
     let url = format!("{}?{}", BASEURL, query);
-    let url = try!(Url::parse(&url));
-    let mut request = try!(Request::new(Method::Post, url));
-    request.headers_mut().set(ContentType(Mime(TopLevel::Application, SubLevel::Json, vec![])));
-    let mut request = try!(request.start());
     let body = vec![("longUrl".to_owned(), Json::String(longurl.to_owned()))];
-    let body = Json::Object(body.into_iter().collect());
-    try!(request.write_all(body.to_string().as_bytes()));
-    let mut response = try!(request.send());
+    let body = Json::Object(body.into_iter().collect()).to_string();
+    let mut response = try!(client.post(&url)
+        .header(ContentType(Mime(TopLevel::Application, SubLevel::Json, vec![])))
+        .body(&body)
+        .send());
     let mut body = String::new();
     try!(response.read_to_string(&mut body));
     if response.status != StatusCode::Ok {
