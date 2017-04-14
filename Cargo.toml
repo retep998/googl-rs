@@ -1,6 +1,6 @@
 [package]
 name = "googl"
-version = "0.0.5"
+version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "A simple interface to the Google URL Shortener API."
 documentation = "https://docs.rs/googl/"
